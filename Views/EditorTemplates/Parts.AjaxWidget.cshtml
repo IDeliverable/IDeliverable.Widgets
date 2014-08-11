@@ -1,0 +1,24 @@
+﻿@model IDeliverable.Widgets.ViewModels.AjaxWidgetPartEditViewModel
+@{
+    var widgetGroups = Model.AvailableWidgets.GroupBy(x => x.LayerPart);
+}
+<fieldset>
+    <legend>@T("AJAX Widget")</legend>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SelectedWidgetId, T("Widget to load asynchronously"))
+        <select id="@Html.FieldIdFor(m => m.SelectedWidgetId)" name="@Html.FieldNameFor(m => m.SelectedWidgetId)">
+            @foreach (var widgetGroup in widgetGroups) {
+                <optgroup label="@widgetGroup.Key.Name">
+                    @foreach (var widget in widgetGroup) {
+                        <option value="@widget.Id" @if (widget.Id == Model.SelectedWidgetId) {<text>selected="selected"</text>}>@String.Format("{0} ({1})", widget.Title, widget.ContentItem.TypeDefinition.DisplayName)</option>
+                    }
+                </optgroup>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DisplayType, T("Display type"))
+        @Html.TextBoxFor(m => m.DisplayType, new { @class = "text medium" })
+        <span class="hint">@T("Optional: Specify the desired display type to use when rendering the selected content. If left empty, &quot;Detail&quot; will be used.")</span>
+    </div>
+</fieldset>
