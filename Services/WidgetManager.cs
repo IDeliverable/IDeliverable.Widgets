@@ -17,9 +17,11 @@ namespace IDeliverable.Widgets.Services {
             _widgetsService = widgetsService;
         }
 
-        public IEnumerable<WidgetExPart> GetWidgets(int hostId) {
+        public IEnumerable<WidgetExPart> GetWidgets(int hostId, VersionOptions versionOptions = null) {
+            versionOptions = versionOptions ?? VersionOptions.Published;
             return _contentManager
                 .Query<WidgetExPart, WidgetExPartRecord>()
+                .ForVersion(versionOptions)
                 .Where(x => x.HostId == hostId)
                 .List();
         }

@@ -6,6 +6,8 @@ using IDeliverable.Widgets.Models;
 using IDeliverable.Widgets.Services;
 using Orchard;
 using Orchard.ContentManagement;
+using Orchard.ContentManagement.Aspects;
+using Orchard.Core.Contents.Settings;
 using Orchard.Environment.Extensions;
 using Orchard.Localization;
 using Orchard.Logging;
@@ -99,7 +101,20 @@ namespace IDeliverable.Widgets.Controllers {
 
         [HttpPost, ActionName("AddWidget")]
         [FormValueRequired("submit.Save")]
-        public ActionResult AddWidgetPost(string widgetType, int hostId) {
+        public ActionResult AddWidgetSavePost(string widgetType, int hostId) {
+            return AddWidgetPost(widgetType, hostId, contentItem => {
+                if (!contentItem.Has<IPublishingControlAspect>() && !contentItem.TypeDefinition.Settings.GetModel<ContentTypeSettings>().Draftable)
+                    _services.ContentManager.Publish(contentItem);
+            });
+        }
+
+        [HttpPost, ActionName("AddWidget")]
+        [FormValueRequired("submit.Publish")]
+        public ActionResult AddWidgetPublishPost(string widgetType, int hostId) {
+            return AddWidgetPost(widgetType, hostId, contentItem => _services.ContentManager.Publish(contentItem));
+        }
+
+        private ActionResult AddWidgetPost(string widgetType, int hostId, Action<ContentItem> conditionallyPublish) {
             if (!IsAuthorizedToManageWidgets())
                 return new HttpUnauthorizedResult();
 
@@ -116,6 +131,7 @@ namespace IDeliverable.Widgets.Controllers {
             try {
                 widgetPart.LayerPart = _widgetManager.GetContentLayer();
                 widgetExPart.Host = contentItem;
+                conditionallyPublish(widgetPart.ContentItem);
             }
             catch (Exception exception) {
                 Logger.Error(T("Creating widget failed: {0}", exception.Message).Text);

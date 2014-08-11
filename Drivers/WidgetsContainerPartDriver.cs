@@ -70,7 +70,7 @@ namespace IDeliverable.Widgets.Drivers {
                 var currentTheme = _siteThemeService.GetSiteTheme();
                 var currentThemesZones = _widgetsService.GetZones(currentTheme).ToList();
                 var widgetTypes = _widgetsService.GetWidgetTypeNames().ToList();
-                var widgets = _widgetManager.GetWidgets(part.Id);
+                var widgets = _widgetManager.GetWidgets(part.Id, VersionOptions.Latest);
                 var zonePreviewImagePath = string.Format("{0}/{1}/ThemeZonePreview.png", currentTheme.Location, currentTheme.Id);
                 var zonePreviewImage = _virtualPathProvider.FileExists(zonePreviewImagePath) ? zonePreviewImagePath : null;
                 var layer = _widgetsService.GetLayers().First();
