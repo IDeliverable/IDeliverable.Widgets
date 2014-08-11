@@ -4,7 +4,7 @@ using Orchard.ContentManagement.Handlers;
 using Orchard.Environment.Extensions;
 
 namespace IDeliverable.Widgets.Drivers {
-    [OrchardFeature("IDeliverable.Widgets.WidgetsContainer")]
+    [OrchardFeature("IDeliverable.Widgets")]
     public class WidgetExPartDriver : ContentPartDriver<WidgetExPart> {
         protected override void Importing(WidgetExPart part, ImportContentContext context) {
             context.ImportAttribute(part.PartDefinition.Name, "HostId", s => part.Host = context.GetItemFromSession(s));

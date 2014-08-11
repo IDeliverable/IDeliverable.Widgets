@@ -18,7 +18,7 @@ using Orchard.Widgets.Models;
 using Orchard.Widgets.Services;
 
 namespace IDeliverable.Widgets.Controllers {
-    [OrchardFeature("IDeliverable.Widgets.WidgetsContainer")]
+    [OrchardFeature("IDeliverable.Widgets")]
     [ValidateInput(false)]
     [Admin]
     public class WidgetAdminController : Controller, IUpdateModel {

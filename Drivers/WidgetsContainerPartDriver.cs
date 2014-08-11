@@ -14,7 +14,7 @@ using Orchard.Themes.Services;
 using Orchard.Widgets.Services;
 
 namespace IDeliverable.Widgets.Drivers {
-    [OrchardFeature("IDeliverable.Widgets.WidgetsContainer")]
+    [OrchardFeature("IDeliverable.Widgets")]
     public class WidgetsContainerPartDriver : ContentPartDriver<WidgetsContainerPart> {
         private readonly ISiteThemeService _siteThemeService;
         private readonly IWidgetsService _widgetsService;

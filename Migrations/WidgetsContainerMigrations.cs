@@ -4,7 +4,7 @@ using Orchard.Data.Migration;
 using Orchard.Environment.Extensions;
 
 namespace IDeliverable.Widgets.Migrations {
-    [OrchardFeature("IDeliverable.Widgets.WidgetsContainer")]
+    [OrchardFeature("IDeliverable.Widgets")]
     public class WidgetsContainerMigrations : DataMigrationImpl {
         public int Create() {
 

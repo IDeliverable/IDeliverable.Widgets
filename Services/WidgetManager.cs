@@ -7,7 +7,7 @@ using Orchard.Widgets.Models;
 using Orchard.Widgets.Services;
 
 namespace IDeliverable.Widgets.Services {
-    [OrchardFeature("IDeliverable.Widgets.WidgetsContainer")]
+    [OrchardFeature("IDeliverable.Widgets")]
     public class WidgetManager : IWidgetManager {
         private readonly IContentManager _contentManager;
         private readonly IWidgetsService _widgetsService;

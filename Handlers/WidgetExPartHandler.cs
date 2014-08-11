@@ -6,7 +6,7 @@ using Orchard.Data;
 using Orchard.Environment.Extensions;
 
 namespace IDeliverable.Widgets.Handlers {
-    [OrchardFeature("IDeliverable.Widgets.WidgetsContainer")]
+    [OrchardFeature("IDeliverable.Widgets")]
     public class WidgetExPartHandler : ContentHandler {
         private readonly IContentDefinitionManager _contentDefinitionManager;
         private readonly IContentManager _contentManager;
