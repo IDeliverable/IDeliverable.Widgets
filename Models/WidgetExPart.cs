@@ -26,7 +26,7 @@ namespace IDeliverable.Widgets.Models {
         }
     }
 
-    public class WidgetExPartRecord : ContentPartRecord {
+    public class WidgetExPartRecord : ContentPartVersionRecord {
         public virtual int? HostId { get;set; }
     }
 }

@@ -9,7 +9,7 @@ namespace IDeliverable.Widgets.Migrations {
         public int Create() {
 
             SchemaBuilder.CreateTable("WidgetExPartRecord", table => table
-                .ContentPartRecord()
+                .ContentPartVersionRecord()
                 .Column<int>("HostId"));
 
             ContentDefinitionManager.AlterPartDefinition("WidgetExPart", part => part.Attachable(false));
