@@ -7,15 +7,6 @@ namespace IDeliverable.Widgets.Migrations {
     [OrchardFeature("IDeliverable.Widgets.Ajax")]
     public class AjaxWidgetMigrations : DataMigrationImpl {
         public int Create() {
-            SchemaBuilder.CreateTable("AjaxWidgetPartRecord", table => table
-               .ContentPartRecord()
-               .Column<int>("SelectedContentItemId")
-               .Column<string>("DisplayType"));
-
-            SchemaBuilder.CreateTable("AjaxifyPartRecord", table => table
-                .ContentPartRecord()
-                .Column<bool>("Ajaxify"));
-            
             ContentDefinitionManager.AlterPartDefinition("AjaxWidgetPart", part => part
                 .Attachable(false)
                 .WithDescription("A widget used to load content and other widgets asynchronously via AJAX."));
@@ -28,9 +19,7 @@ namespace IDeliverable.Widgets.Migrations {
                 .WithPart("CommonPart")
                 .WithPart("WidgetPart")
                 .WithPart("AjaxWidgetPart")
-                .WithSetting("Stereotype", "Widget")
-                .Creatable(false)
-                .Draftable(false));
+                .WithSetting("Stereotype", "Widget"));
 
             return 1;
         }

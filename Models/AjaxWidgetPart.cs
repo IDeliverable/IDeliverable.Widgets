@@ -1,14 +1,13 @@
 ﻿using Orchard.ContentManagement;
-using Orchard.ContentManagement.Records;
 using Orchard.Core.Common.Utilities;
 
 namespace IDeliverable.Widgets.Models {
-    public class AjaxWidgetPart : ContentPart<AjaxWidgetPartRecord> {
+    public class AjaxWidgetPart : ContentPart {
         internal LazyField<ContentItem> _selectedContentItemField = new LazyField<ContentItem>();
 
         public int? SelectedContentItemId {
-            get { return Record.SelectedContentItemId; }
-            set { Record.SelectedContentItemId = value; }
+            get { return this.Retrieve(x => x.SelectedContentItemId); }
+            set { this.Store(x => x.SelectedContentItemId, value); }
         }
 
         public ContentItem SelectedContentItem {
@@ -17,13 +16,8 @@ namespace IDeliverable.Widgets.Models {
         }
 
         public string DisplayType {
-            get { return Record.DisplayType; }
-            set { Record.DisplayType = value; }
+            get { return this.Retrieve(x => x.DisplayType); }
+            set { this.Store(x => x.DisplayType, value); }
         }
-    }
-
-    public class AjaxWidgetPartRecord : ContentPartRecord {
-        public virtual int? SelectedContentItemId { get; set; }
-        public virtual string DisplayType { get; set; }
     }
 }

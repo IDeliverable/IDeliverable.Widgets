@@ -12,6 +12,11 @@ namespace IDeliverable.Widgets.Models {
             set { _hostField.Value = value; }
         }
 
+        public int? HostId {
+            get { return Retrieve(x => x.HostId); }
+            set { Store(x => x.HostId, value); }
+        }
+
         public string Zone {
             get { return this.As<WidgetPart>().Zone; }
         }

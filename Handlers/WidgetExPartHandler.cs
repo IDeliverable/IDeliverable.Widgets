@@ -19,9 +19,9 @@ namespace IDeliverable.Widgets.Handlers {
         }
 
         private void SetupFields(ActivatedContentContext context, WidgetExPart part) {
-            part._hostField.Loader(() => part.Record.HostId != null ? _contentManager.Get(part.Record.HostId.Value) : null);
+            part._hostField.Loader(() => part.HostId != null ? _contentManager.Get(part.HostId.Value) : null);
             part._hostField.Setter(x => {
-                part.Record.HostId = x != null ? x.Id : default(int?);
+                part.HostId = x != null ? x.Id : default(int?);
                 return x;
             });
         }

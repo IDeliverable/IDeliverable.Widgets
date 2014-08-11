@@ -1,7 +1,6 @@
 ﻿using IDeliverable.Widgets.Models;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Handlers;
-using Orchard.Data;
 using Orchard.Environment.Extensions;
 
 namespace IDeliverable.Widgets.Handlers {
@@ -10,9 +9,8 @@ namespace IDeliverable.Widgets.Handlers {
 
         private readonly IContentManager _contentManager;
 
-        public AjaxWidgetPartHandler(IRepository<AjaxWidgetPartRecord> repository, IContentManager contentManager) {
+        public AjaxWidgetPartHandler(IContentManager contentManager) {
             _contentManager = contentManager;
-            Filters.Add(StorageFilter.For(repository));
             OnActivated<AjaxWidgetPart>(SetupLazyFields);
         }
 

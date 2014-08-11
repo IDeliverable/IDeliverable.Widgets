@@ -121,7 +121,6 @@
     <Compile Include="Drivers\AjaxWidgetPartDriver.cs" />
     <Compile Include="Drivers\WidgetExPartDriver.cs" />
     <Compile Include="Drivers\WidgetsContainerPartDriver.cs" />
-    <Compile Include="Handlers\AjaxifyPartHandler.cs" />
     <Compile Include="Handlers\AjaxWidgetPartHandler.cs" />
     <Compile Include="Handlers\WidgetExPartHandler.cs" />
     <Compile Include="Migrations\AjaxWidgetMigrations.cs" />
