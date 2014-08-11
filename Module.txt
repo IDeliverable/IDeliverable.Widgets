@@ -4,9 +4,8 @@ Author: IDeliverable
 Website: https://github.com/IDeliverable/IDeliverable.Widgets
 Version: 1.9
 OrchardVersion: 1.9
-Description: Provides additional widget parts and services, such as WidgetsContainer and AjaxifyPart.
 Features:
-    IDeliverable.Widgets.WidgetsContainer:
+    IDeliverable.Widgets:
         Name: Widgets Container
         Description: Add widgets per content item without creating new layers. Attach the WidgetContainerPart to content types to which you want to be able to add widgets.
         Category: Widget
@@ -14,5 +13,5 @@ Features:
     IDeliverable.Widgets.Ajax
         Name: Ajax Widget
         Description: Provides an AjaxifyPart used to create widgets that can load content and other widgets asynchronously via AJAX.
-        Categry: Widget
+        Category: Widget
         Dependencies: Orchard.Widgets, Orchard.jQuery
