@@ -28,9 +28,9 @@
                         <ol>
                             @foreach (var zone in zones) {
                                 var widgets = allWidgets.Where(x => x.Zone == zone).OrderBy(w => w.Position, new Orchard.UI.FlatPositionComparer());
-                                var addWidgetUrl = contentItem.Id != 0 
-                                                       ? Url.Action("ListWidgets", "Admin", new { area = "Contrib.Widgets", hostId = contentItem.Id, zone})
-                                                       : Url.Action("CreateContent", "Admin", new { area = "Contrib.Widgets", id = contentItem.ContentType, zone});
+                                var addWidgetUrl = contentItem.Id != 0
+                                                       ? Url.Action("ListWidgets", "WidgetAdmin", new { area = "IDeliverable.Widgets", hostId = contentItem.Id, zone })
+                                                       : Url.Action("CreateContent", "WidgetAdmin", new { area = "IDeliverable.Widgets", id = contentItem.ContentType, zone });
                                 <li>
                                     <h2>@zone</h2>
                                     <div class="zone-actions">
@@ -39,7 +39,7 @@
                                     <ul class="widgets" data-zone="@zone" id="@zone">
                                         @foreach (var widget in widgets) {
                                             <li data-widget-id="@widget.Id">
-                                                <h3><a href="@Url.Action("EditWidget", "Admin", new { area = "Contrib.Widgets", hostId = contentItem.Id, id = widget.Id })">@Html.ItemDisplayText(widget)</a></h3>
+                                                <h3><a href="@Url.Action("EditWidget", "WidgetAdmin", new { area = "IDeliverable.Widgets", hostId = contentItem.Id, id = widget.Id })">@Html.ItemDisplayText(widget)</a></h3>
                                                 <div class="widget-actions">
                                                     <a href="#" class="remove-widget" data-confirm="@T("Are you sure you want to delete this widget? Note: the widget will be removed permanently when you save the content item.")">@T("Remove")</a>
                                                 </div>

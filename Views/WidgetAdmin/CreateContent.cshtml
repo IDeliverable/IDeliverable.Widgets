@@ -9,7 +9,7 @@
     Layout.Title = pageTitle.Text;
 }
 
-@using (Html.BeginFormAntiForgeryPost(Url.Action("CreateContent", new { hostId = Request.QueryString["HostId"], zone = Request.QueryString["Zone"], area = "IDeliverable.Widgets" }))) {
+@using (Html.BeginFormAntiForgeryPost(Url.Action("CreateContent", "WidgetAdmin", new { hostId = Request.QueryString["HostId"], zone = Request.QueryString["Zone"], area = "IDeliverable.Widgets" }))) {
     @Html.ValidationSummary()
     @Display(Model)
 }
