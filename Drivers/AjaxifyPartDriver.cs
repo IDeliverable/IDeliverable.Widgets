@@ -1,6 +1,8 @@
-﻿using IDeliverable.Widgets.Models;
+﻿using System.Xml;
+using IDeliverable.Widgets.Models;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
+using Orchard.ContentManagement.Handlers;
 using Orchard.Environment.Extensions;
 
 namespace IDeliverable.Widgets.Drivers {
@@ -19,6 +21,14 @@ namespace IDeliverable.Widgets.Drivers {
 
                 return shapeHelper.EditorTemplate(TemplateName: "Parts.Ajaxify", Model: part, Prefix: Prefix);
             });
+        }
+
+        protected override void Exporting(AjaxifyPart part, ExportContentContext context) {
+            context.Element(part.PartDefinition.Name).SetAttributeValue("Ajaxify", part.Ajaxify);
+        }
+
+        protected override void Importing(AjaxifyPart part, ImportContentContext context) {
+            context.ImportAttribute(part.PartDefinition.Name, "Ajaxify", x => part.Ajaxify = XmlConvert.ToBoolean(x));
         }
     }
 }
