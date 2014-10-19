@@ -6,7 +6,7 @@ using Orchard.Environment.Extensions;
 
 namespace IDeliverable.Widgets.Shapes {
     [OrchardFeature("IDeliverable.Widgets.Ajax")]
-    public class AjaxidgetShapes : IShapeTableProvider {
+    public class AjaxWidgetShapes : IShapeTableProvider {
         public void Discover(ShapeTableBuilder builder) {
             builder.Describe("Widget").OnDisplaying(context => Ajaxify(context, "Widget__Ajaxified"));
             builder.Describe("Content").OnDisplaying(context => Ajaxify(context, "Content__Ajaxified"));
