@@ -1,4 +1,7 @@
 ﻿@model IDeliverable.Widgets.Models.AjaxifyPart
+@{
+    Script.Require("ShapesBase");
+}
 <fieldset>
     <legend>@T("Asynchronous Settings")</legend>
     <div class="form-group">
@@ -6,7 +9,7 @@
         @Html.LabelFor(m => m.Ajaxify, T("Ajaxify").ToString(), new { @class = "forcheckbox" })
         <span class="hint">@T("Check to load this content item asynchronously via AJAX.")</span>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-controllerid="@Html.FieldIdFor(m => m.Ajaxify)">
         @Html.CheckBoxFor(m => m.Cache)
         @Html.LabelFor(m => m.Cache, T("Cache").ToString(), new { @class = "forcheckbox" })
         <span class="hint">@T("Check to cache the output of this content item when loaded asynchronously.")</span>
