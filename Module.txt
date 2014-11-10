@@ -16,3 +16,8 @@ Features:
         Description: Provides an AjaxifyPart used to create widgets that can load content and other widgets asynchronously via AJAX.
         Category: Widget
         Dependencies: Orchard.Widgets, Orchard.jQuery
+    IDeliverable.Widgets.OutputCache
+        Name: Widget Output Cache
+        Description: Provides an OutputCachePart for use with widget content types. Attach this part to widgets for which you want to control output caching.
+        Category: Widget
+        Dependencies: Orchard.Widgets, Orchard.OutputCache
