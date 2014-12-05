@@ -38,6 +38,7 @@ namespace IDeliverable.Widgets.Filters
         private readonly ISignals _signals;
         private readonly IThemeManager _themeManager;
         private readonly ShellSettings _shellSettings;
+        private CacheSettings _cacheSettings;
 
         public WidgetFilter(
             IWorkContextAccessor workContextAccessor,
@@ -167,8 +168,8 @@ namespace IDeliverable.Widgets.Filters
             var workContext = controllerContext.GetWorkContext();
             var theme = _themeManager.GetRequestTheme(controllerContext.RequestContext).Id;
             var url = GetAbsoluteUrl(controllerContext);
-            var settings = GetCacheSettings(controllerContext);
-            var varyByHeaders = new HashSet<string>(settings.VaryRequestHeaders);
+            var settings = GetCacheSettings(workContext);
+            var varyByHeaders = new HashSet<string>(settings.VaryByRequestHeaders);
 
             // Different tenants with the same urls have different entries.
             varyByHeaders.Add("HOST");
@@ -196,7 +197,7 @@ namespace IDeliverable.Widgets.Filters
             sb.Append("tenant=").Append(_shellSettings.Name).Append(";");
             sb.Append("url=").Append(url.ToLowerInvariant()).Append(";");
 
-            if (settings.ApplyCulture)
+            if (settings.VaryByCulture)
             {
                 sb.Append("culture=").Append(workContext.CurrentCulture.ToLowerInvariant()).Append(";");
             }
@@ -247,30 +248,13 @@ namespace IDeliverable.Widgets.Filters
             return _shapeDisplay.Display(widgetShape);
         }
 
-        private CacheSettings GetCacheSettings(ControllerContext controllerContext)
+        private CacheSettings GetCacheSettings(WorkContext workContext)
         {
-            return _cacheManager.Get("WidgetFilter.CacheSettingsPart",
-                context =>
-                {
-                    context.Monitor(_signals.When(CacheSettingsPart.CacheKey));
-                    var cacheSettingsPart = controllerContext.GetWorkContext().CurrentSite.As<CacheSettingsPart>();
-
-                    return new CacheSettings
-                    {
-                        ApplyCulture = cacheSettingsPart.ApplyCulture,
-                        VaryRequestHeaders =
-                            !String.IsNullOrWhiteSpace(cacheSettingsPart.VaryRequestHeaders)
-                                ? cacheSettingsPart.VaryRequestHeaders.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToList()
-                                : new List<string>()
-                    };
-                }
-            );
-        }
-
-        private class CacheSettings
-        {
-            public bool ApplyCulture { get; set; }
-            public IList<string> VaryRequestHeaders { get; set; }
+            return _cacheSettings ?? (_cacheSettings = _cacheManager.Get(CacheSettings.CacheKey, context =>
+            {
+                context.Monitor(_signals.When(CacheSettings.CacheKey));
+                return new CacheSettings(workContext.CurrentSite.As<CacheSettingsPart>());
+            }));
         }
     }
 }

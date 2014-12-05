@@ -6,20 +6,20 @@ using Orchard.Mvc.Routes;
 
 namespace IDeliverable.Widgets.Routes
 {
-    [OrchardFeature("IDeliverable.Widgets.Ajax")]
-    public class AjaxWidgetRoutes : IRouteProvider
+    [OrchardFeature("IDeliverable.Widgets")]
+    public class Routes : IRouteProvider
     {
         public IEnumerable<RouteDescriptor> GetRoutes()
         {
             yield return new RouteDescriptor
             {
-                Name = "AjaxifyContent",
+                Name = "WidgetEditor",
                 Priority = 1,
                 Route = new Route(
-                    url: "AjaxifyContent/{id}",
+                    url: "Admin/WidgetsContainer/{action}/{id}",
                     defaults: new RouteValueDictionary {
-                        { "action", "Display" },
-                        { "controller", "Ajax" },
+                        { "id", UrlParameter.Optional },
+                        { "controller", "WidgetAdmin" },
                         { "area", "IDeliverable.Widgets" },
                     },
                     constraints: new RouteValueDictionary(),
