@@ -2,7 +2,7 @@
 AntiForgery: enabled
 Author: IDeliverable
 Website: https://github.com/IDeliverable/IDeliverable.Widgets
-Version: 1.8
+Version: 1.8.1
 OrchardVersion: 1.8
 Description: Provides advanced widget support, such as widgets per content item, a content picker widget and an way to ajaxify content and widgets.
 Features:

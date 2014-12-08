@@ -30,7 +30,6 @@ namespace IDeliverable.Widgets.Migrations {
                     .WithSetting("AutorouteSettings.DefaultPatternIndex", "0"))
                 .WithPart("BodyPart")
                 .WithPart("WidgetsContainerPart")
-                .Listable()
                 .Creatable());
 
             return 1;

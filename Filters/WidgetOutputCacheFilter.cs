@@ -169,7 +169,7 @@ namespace IDeliverable.Widgets.Filters
             var theme = _themeManager.GetRequestTheme(controllerContext.RequestContext).Id;
             var url = GetAbsoluteUrl(controllerContext);
             var settings = GetCacheSettings(workContext);
-            var varyByHeaders = new HashSet<string>(settings.VaryByRequestHeaders);
+            var varyByHeaders = new HashSet<string>(settings.VaryRequestHeaders);
 
             // Different tenants with the same urls have different entries.
             varyByHeaders.Add("HOST");
@@ -197,7 +197,7 @@ namespace IDeliverable.Widgets.Filters
             sb.Append("tenant=").Append(_shellSettings.Name).Append(";");
             sb.Append("url=").Append(url.ToLowerInvariant()).Append(";");
 
-            if (settings.VaryByCulture)
+            if (settings.ApplyCulture)
             {
                 sb.Append("culture=").Append(workContext.CurrentCulture.ToLowerInvariant()).Append(";");
             }
@@ -250,9 +250,9 @@ namespace IDeliverable.Widgets.Filters
 
         private CacheSettings GetCacheSettings(WorkContext workContext)
         {
-            return _cacheSettings ?? (_cacheSettings = _cacheManager.Get(CacheSettings.CacheKey, context =>
+            return _cacheSettings ?? (_cacheSettings = _cacheManager.Get(CacheSettingsPart.CacheKey, context =>
             {
-                context.Monitor(_signals.When(CacheSettings.CacheKey));
+                context.Monitor(_signals.When(CacheSettingsPart.CacheKey));
                 return new CacheSettings(workContext.CurrentSite.As<CacheSettingsPart>());
             }));
         }
