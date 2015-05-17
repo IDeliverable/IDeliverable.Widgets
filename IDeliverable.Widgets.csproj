@@ -108,20 +108,17 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Drivers\OutputCachePartDriver.cs" />
     <Compile Include="Drivers\AjaxifyPartDriver.cs" />
-    <Compile Include="Drivers\AjaxWidgetPartDriver.cs" />
     <Compile Include="Drivers\WidgetExPartDriver.cs" />
     <Compile Include="Drivers\WidgetsContainerPartDriver.cs" />
     <Compile Include="Filters\WidgetOutputCacheFilter.cs" />
     <Compile Include="Handlers\OutputCachePartHandler.cs" />
     <Compile Include="Handlers\AjaxifyPartHandler.cs" />
-    <Compile Include="Handlers\AjaxWidgetPartHandler.cs" />
     <Compile Include="Handlers\WidgetExPartHandler.cs" />
     <Compile Include="Migrations\OutputCacheMigrations.cs" />
     <Compile Include="Migrations\AjaxWidgetMigrations.cs" />
     <Compile Include="Migrations\WidgetsContainerMigrations.cs" />
     <Compile Include="Models\OutputCachePart.cs" />
     <Compile Include="Models\AjaxifyPart.cs" />
-    <Compile Include="Models\AjaxWidgetPart.cs" />
     <Compile Include="Models\WidgetExPart.cs" />
     <Compile Include="Models\WidgetsContainerPart.cs" />
     <Compile Include="ResourceManifests\AjaxWidgetResourceManifest.cs" />
@@ -132,7 +129,6 @@
     <Compile Include="Shapes\WidgetOutputCacheShapes.cs" />
     <Compile Include="Shapes\AjaxWidgetShapes.cs" />
     <Compile Include="SignalKeys.cs" />
-    <Compile Include="ViewModels\AjaxWidgetPartEditViewModel.cs" />
     <Compile Include="ViewModels\WidgetsContainerViewModel.cs" />
     <Compile Include="ViewModels\WidgetViewModel.cs" />
     <Compile Include="ViewModels\ZoneViewModel.cs" />
@@ -188,9 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts.Ajaxify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts.AjaxWidget.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AjaxWidgetPartLoading.cshtml" />
