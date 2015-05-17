@@ -112,7 +112,6 @@
     <Compile Include="Drivers\WidgetsContainerPartDriver.cs" />
     <Compile Include="Filters\WidgetOutputCacheFilter.cs" />
     <Compile Include="Handlers\OutputCachePartHandler.cs" />
-    <Compile Include="Handlers\AjaxifyPartHandler.cs" />
     <Compile Include="Handlers\WidgetExPartHandler.cs" />
     <Compile Include="Migrations\OutputCacheMigrations.cs" />
     <Compile Include="Migrations\AjaxWidgetMigrations.cs" />
@@ -128,7 +127,6 @@
     <Compile Include="Services\WidgetManager.cs" />
     <Compile Include="Shapes\WidgetOutputCacheShapes.cs" />
     <Compile Include="Shapes\AjaxWidgetShapes.cs" />
-    <Compile Include="SignalKeys.cs" />
     <Compile Include="ViewModels\WidgetsContainerViewModel.cs" />
     <Compile Include="ViewModels\WidgetViewModel.cs" />
     <Compile Include="ViewModels\ZoneViewModel.cs" />

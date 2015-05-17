@@ -6,10 +6,5 @@ namespace IDeliverable.Widgets.Models {
             get { return this.Retrieve(x => x.Ajaxify); }
             set { this.Store(x => x.Ajaxify, value); }
         }
-
-        public bool Cache {
-            get { return this.Retrieve(x => x.Cache); }
-            set { this.Store(x => x.Cache, value); }
-        }
     }
 }
