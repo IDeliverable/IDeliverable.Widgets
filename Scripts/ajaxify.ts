@@ -4,11 +4,16 @@ module IDeliverable.AjaxWidget {
     $(function () {
 
         $(".widget-ajax-placeholder").each(function () {
-            var ajaxUrl = $(this).data("widget-ajax-url");
-            var parent = $(this).parent();
-            if (ajaxUrl) {
+            var placeholder = $(this);
+            var loader = placeholder.find(".widget-ajax-loader");
+            var errorLabel = placeholder.find(".widget-ajax-error");
+            var ajaxUrl = placeholder.data("widget-ajax-url") + ".com";
+            var parent = placeholder.parent();
 
-                var update = function(url, target) {
+            if (ajaxUrl) {
+                var update = function (url, target) {
+                    errorLabel.hide();
+                    loader.show();
                     $.get(url, function (html) {
                         var newContent = $(html);
                         target.replaceWith(newContent);
@@ -18,6 +23,9 @@ module IDeliverable.AjaxWidget {
                             update($(this).attr("href"), newContent);
                             e.preventDefault();
                         });
+                    }).fail(function() {
+                        errorLabel.show();
+                        loader.hide();
                     });
                 };
 
