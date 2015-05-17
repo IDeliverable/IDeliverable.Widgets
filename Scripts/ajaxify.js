@@ -8,7 +8,7 @@ var IDeliverable;
                 var placeholder = $(this);
                 var loader = placeholder.find(".widget-ajax-loader");
                 var errorLabel = placeholder.find(".widget-ajax-error");
-                var ajaxUrl = placeholder.data("widget-ajax-url") + ".com";
+                var ajaxUrl = placeholder.data("widget-ajax-url");
                 var parent = placeholder.parent();
                 if (ajaxUrl) {
                     var update = function (url, target) {
