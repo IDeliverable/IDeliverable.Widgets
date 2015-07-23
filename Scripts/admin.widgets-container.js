@@ -69,8 +69,7 @@ var WidgetsContainer;
             return controller.nextAll(".expando");
         }, {
             collapse: true,
-            remember: true
-        });
+            remember: true });
     });
 })(WidgetsContainer || (WidgetsContainer = {}));
 //# sourceMappingURL=admin.widgets-container.js.map
