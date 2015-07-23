@@ -26,6 +26,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -132,11 +133,11 @@
     <Compile Include="ViewModels\ZoneViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\admin.edit-widget.ts" />
-    <TypeScriptCompile Include="Scripts\admin.widgets-container.ts" />
+    <Content Include="Scripts\admin.edit-widget.ts" />
+    <Content Include="Scripts\admin.widgets-container.ts" />
     <Content Include="Scripts\typings\jquery\jqueryui.d.ts" />
     <Content Include="Scripts\typings\the-admin.d.ts" />
-    <TypeScriptCompile Include="Scripts\ajaxify.ts" />
+    <Content Include="Scripts\ajaxify.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
