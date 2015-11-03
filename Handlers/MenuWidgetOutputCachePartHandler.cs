@@ -3,7 +3,6 @@ using Orchard.Caching;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Handlers;
 using Orchard.Core.Navigation.Models;
-using Orchard.Core.Navigation.Services;
 using Orchard.Environment.Extensions;
 
 namespace IDeliverable.Widgets.Handlers
@@ -13,13 +12,11 @@ namespace IDeliverable.Widgets.Handlers
     {
         private readonly ISignals _signals;
         private readonly IContentManager _contentManager;
-        private readonly IMenuService _menuService;
 
-        public MenuWidgetOutputCachePartHandler(ISignals signals, IContentManager contentManager, IMenuService menuService)
+        public MenuWidgetOutputCachePartHandler(ISignals signals, IContentManager contentManager)
         {
             _signals = signals;
             _contentManager = contentManager;
-            _menuService = menuService;
 
             OnCreated<MenuPart>(EvictMenuWidgetCaches);
             OnUpdated<MenuPart>(EvictMenuWidgetCaches);
@@ -42,7 +39,7 @@ namespace IDeliverable.Widgets.Handlers
 
                 if (menuWidgetPart != null && menuWidgetPart.MenuContentItemId == part.Menu.Id)
                 {
-                    _signals.Trigger(OutputCachePart.ContentSignalName(part.Menu.Id));
+                    _signals.Trigger(OutputCachePart.ContentSignalName(menuWidgetPart.Id));
                 }
             }
         }
