@@ -99,6 +99,7 @@
     <Compile Include="Drivers\WidgetExPartDriver.cs" />
     <Compile Include="Drivers\WidgetsContainerPartDriver.cs" />
     <Compile Include="Filters\WidgetOutputCacheFilter.cs" />
+    <Compile Include="Handlers\MenuWidgetOutputCachePartHandler.cs" />
     <Compile Include="Handlers\OutputCachePartHandler.cs" />
     <Compile Include="Handlers\WidgetExPartHandler.cs" />
     <Compile Include="Migrations\OutputCacheMigrations.cs" />
