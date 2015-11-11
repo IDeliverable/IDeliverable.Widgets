@@ -80,25 +80,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Module.txt" />
-    <Content Include="Scripts\admin.edit-widget.js">
-      <DependentUpon>admin.edit-widget.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\admin.edit-widget.min.js">
-      <DependentUpon>admin.edit-widget.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\admin.widgets-container.js">
-      <DependentUpon>admin.widgets-container.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\admin.widgets-container.min.js">
-      <DependentUpon>admin.widgets-container.ts</DependentUpon>
-    </Content>
+    <Content Include="Scripts\admin.edit-widget.js" />
+    <Content Include="Scripts\admin.edit-widget.min.js" />
+    <Content Include="Scripts\admin.widgets-container.js" />
+    <Content Include="Scripts\admin.widgets-container.min.js" />
     <Content Include="Scripts\ajaxify.js" />
-    <Content Include="Styles\admin.widgets-container.css">
-      <DependentUpon>admin.widgets-container.less</DependentUpon>
-    </Content>
-    <Content Include="Styles\admin.widgets-container.min.css">
-      <DependentUpon>admin.widgets-container.less</DependentUpon>
-    </Content>
+    <Content Include="Scripts\ajaxify.min.js" />
+    <Content Include="Styles\admin.widgets-container.css" />
+    <Content Include="Styles\admin.widgets-container.min.css" />
     <Content Include="Web.config" />
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -131,18 +120,18 @@
     <Compile Include="ViewModels\ZoneViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\admin.edit-widget.ts" />
-    <Content Include="Scripts\admin.widgets-container.ts" />
-    <Content Include="Scripts\typings\jquery\jqueryui.d.ts" />
-    <Content Include="Scripts\typings\the-admin.d.ts" />
-    <Content Include="Scripts\ajaxify.ts" />
-    <Content Include="Scripts\typings\jquery\jquery.d.ts" />
+    <Content Include="Assets\TypeScript\admin.edit-widget.ts" />
+    <Content Include="Assets\TypeScript\admin.widgets-container.ts" />
+    <Content Include="Assets\TypeScript\typings\jquery\jqueryui.d.ts" />
+    <Content Include="Assets\TypeScript\typings\the-admin.d.ts" />
+    <Content Include="Assets\TypeScript\ajaxify.ts" />
+    <Content Include="Assets\TypeScript\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Styles\admin.widgets-container.less" />
+    <Content Include="Assets\Less\admin.widgets-container.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Styles\Web.config" />
@@ -170,14 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Placement.info" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\admin.edit-widget.js.map" />
-    <Content Include="Scripts\admin.widgets-container.js.map" />
-    <Content Include="Scripts\ajaxify.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts.Ajaxify.cshtml" />
@@ -222,6 +203,12 @@
   <ItemGroup>
     <Content Include="Views\AjaxWidgetPartError.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Localization\en-US\orchard.module.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -259,7 +246,7 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
+          <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
