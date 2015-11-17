@@ -23,10 +23,10 @@ namespace IDeliverable.Widgets.Handlers
 
         private void SetupFields(ActivatedContentContext context, WidgetExPart part)
         {
-            part._hostField.Loader(() => part.HostId != null ? _contentManager.Get(part.HostId.Value) : null);
+            part._hostField.Loader(x => part.HostId != null ? _contentManager.Get(part.HostId.Value) : null);
             part._hostField.Setter(x =>
             {
-                part.HostId = x != null ? x.Id : default(int?);
+                part.HostId = x?.Id;
                 return x;
             });
         }
