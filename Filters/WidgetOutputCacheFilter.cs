@@ -276,16 +276,24 @@ namespace IDeliverable.Widgets.Filters
         private void ReinstateResources(OutputCachedWidgetModel cachedModel)
         {
             foreach (var resource in cachedModel.IncludedResources)
+            {
                 _resourceManager.Include(resource.ResourceType, resource.ResourcePath, resource.ResourceDebugPath, resource.RelativeFromPath);
+            }
 
             foreach (var resource in cachedModel.RequiredResources)
+            {
                 _resourceManager.Require(resource.ResourceType, resource.ResourceName);
+            }
 
             foreach (var script in cachedModel.HeadScripts)
-                _resourceManager.RegisterHeadScript(script);
+            {
+                    _resourceManager.RegisterHeadScript(script);
+            }
 
             foreach (var script in cachedModel.FootScripts)
-                _resourceManager.RegisterFootScript(script);
+            {
+                        _resourceManager.RegisterFootScript(script);
+            }
         }
     }
 }
