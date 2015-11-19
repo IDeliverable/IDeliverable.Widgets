@@ -1,6 +1,6 @@
-﻿using System;
-using IDeliverable.Widgets.Models;
+﻿using IDeliverable.Widgets.Models;
 using Orchard;
+using System;
 
 namespace IDeliverable.Widgets.Services
 {

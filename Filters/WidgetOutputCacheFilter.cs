@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using IDeliverable.Widgets.Models;
+using IDeliverable.Widgets.Services;
 using Orchard;
 using Orchard.Caching;
 using Orchard.ContentManagement;
@@ -19,11 +20,10 @@ using Orchard.Mvc.Filters;
 using Orchard.OutputCache.Models;
 using Orchard.Themes;
 using Orchard.UI.Admin;
+using Orchard.UI.Resources;
 using Orchard.Utility.Extensions;
 using Orchard.Widgets.Models;
 using Orchard.Widgets.Services;
-using IDeliverable.Widgets.Services;
-using Orchard.UI.Resources;
 
 namespace IDeliverable.Widgets.Filters
 {
@@ -253,9 +253,7 @@ namespace IDeliverable.Widgets.Filters
             });
 
             if (reinstateResources)
-            {
                 ReinstateResources(cachedModel);
-            }
 
             return _orchardServices.New.RawOutput(Content: cachedModel.Html);
         }
@@ -278,24 +276,16 @@ namespace IDeliverable.Widgets.Filters
         private void ReinstateResources(OutputCachedWidgetModel cachedModel)
         {
             foreach (var resource in cachedModel.IncludedResources)
-            {
                 _resourceManager.Include(resource.ResourceType, resource.ResourcePath, resource.ResourceDebugPath, resource.RelativeFromPath);
-            }
 
             foreach (var resource in cachedModel.RequiredResources)
-            {
                 _resourceManager.Require(resource.ResourceType, resource.ResourceName);
-            }
 
             foreach (var script in cachedModel.HeadScripts)
-            {
                 _resourceManager.RegisterHeadScript(script);
-            }
 
             foreach (var script in cachedModel.FootScripts)
-            {
                 _resourceManager.RegisterFootScript(script);
-            }
         }
     }
 }

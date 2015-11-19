@@ -1,8 +1,8 @@
-﻿using IDeliverable.Widgets.Events;
+﻿using Autofac.Features.Metadata;
+using IDeliverable.Widgets.Events;
 using Orchard.Environment.Extensions;
 using Orchard.UI.Resources;
 using System.Collections.Generic;
-using Autofac.Features.Metadata;
 
 namespace IDeliverable.Widgets.Services
 {
@@ -36,9 +36,7 @@ namespace IDeliverable.Widgets.Services
         {
             //include calls require under the hood, so we will end up with dupicate events in that case
             if (!SuppressRequireEvents)
-            {
                 _resourceManagerEvents.ResourceRequired(resourceType, resourceName);
-            }
 
             return base.Require(resourceType, resourceName);
         }

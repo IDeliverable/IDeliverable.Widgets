@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
 using IDeliverable.Widgets.Events;
 using IDeliverable.Widgets.Models;
 using Orchard.Environment.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace IDeliverable.Widgets.Services
 {
     [OrchardFeature("IDeliverable.Widgets.OutputCache")]
     public class DefaultOuputCachedWidgetsService : IOuputCachedWidgetsService, IResourceManagerEvents
     {
-        private bool WithinContext { get; set; }
+        // Indicates if we are inside the CaptureWidgetMethod. Used to determine if includes should be added to the model.
+        private bool IsWithinCaptureContext { get; set; }
         private IList<ResourceRequiredModel> RequiredResources { get; set; }
         private IList<ResourceIncludedModel> IncludedResources { get; set; }
         private IList<string> FootScripts { get; set; }
@@ -21,7 +22,7 @@ namespace IDeliverable.Widgets.Services
 
             try
             {
-                WithinContext = true;
+                IsWithinCaptureContext = true;
                 RequiredResources = new List<ResourceRequiredModel>();
                 IncludedResources = new List<ResourceIncludedModel>();
                 FootScripts = new List<string>();
@@ -36,7 +37,7 @@ namespace IDeliverable.Widgets.Services
             }
             finally
             {
-                WithinContext = false;
+                IsWithinCaptureContext = false;
             }
 
 
@@ -46,23 +47,19 @@ namespace IDeliverable.Widgets.Services
         // When these events are raised while creating html to be cached, then we need to add a record of the values passed into the cache as well so that we can re-instate the resources when we get the html back from the cache
         public void FootScriptRegistered(string script)
         {
-            if (WithinContext)
-            {
+            if (IsWithinCaptureContext)
                 FootScripts.Add(script);
-            }
         }
 
         public void HeadScriptRegistered(string script)
         {
-            if (WithinContext)
-            {
+            if (IsWithinCaptureContext)
                 HeadScripts.Add(script);
-            }
         }
 
         public void ResourceRequired(string resourceType, string resourceName)
         {
-            if (WithinContext)
+            if (IsWithinCaptureContext)
             {
                 RequiredResources.Add(new ResourceRequiredModel
                 {
@@ -74,7 +71,7 @@ namespace IDeliverable.Widgets.Services
 
         public void ResourceIncluded(string resourceType, string resourcePath, string resourceDebugPath, string relativeFromPath)
         {
-            if (WithinContext)
+            if (IsWithinCaptureContext)
             {
                 IncludedResources.Add(new ResourceIncludedModel
                 {
