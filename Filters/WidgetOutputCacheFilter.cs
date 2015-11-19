@@ -22,6 +22,8 @@ using Orchard.UI.Admin;
 using Orchard.Utility.Extensions;
 using Orchard.Widgets.Models;
 using Orchard.Widgets.Services;
+using IDeliverable.Widgets.Services;
+using Orchard.UI.Resources;
 
 namespace IDeliverable.Widgets.Filters
 {
@@ -38,6 +40,8 @@ namespace IDeliverable.Widgets.Filters
         private readonly ISignals _signals;
         private readonly IThemeManager _themeManager;
         private readonly ShellSettings _shellSettings;
+        private readonly IOuputCachedWidgetsService _ouputCachedWidgetsService;
+        private readonly IResourceManager _resourceManager;
         private CacheSettings _cacheSettings;
 
         public WidgetFilter(
@@ -49,7 +53,9 @@ namespace IDeliverable.Widgets.Filters
             ICacheManager cacheManager,
             ISignals signals,
             IThemeManager themeManager,
-            ShellSettings shellSettings)
+            ShellSettings shellSettings,
+            IOuputCachedWidgetsService ouputCachedWidgetsService,
+            IResourceManager resourceManager)
         {
 
             _workContextAccessor = workContextAccessor;
@@ -61,6 +67,8 @@ namespace IDeliverable.Widgets.Filters
             _signals = signals;
             _themeManager = themeManager;
             _shellSettings = shellSettings;
+            _ouputCachedWidgetsService = ouputCachedWidgetsService;
+            _resourceManager = resourceManager;
             Logger = NullLogger.Instance;
             T = NullLocalizer.Instance;
         }
@@ -230,16 +238,26 @@ namespace IDeliverable.Widgets.Filters
 
         private dynamic BuildCachedWidgetShape(WidgetPart widgetPart, ControllerContext controllerContext)
         {
+            var reinstateResources = true;
+
             var cacheKey = ComputeCacheKey(widgetPart, controllerContext);
-            var widgetOutput = _cacheManager.Get(cacheKey, context =>
+            var cachedModel = _cacheManager.Get(cacheKey, context =>
             {
                 context.Monitor(_signals.When(OutputCachePart.GenericSignalName));
                 context.Monitor(_signals.When(OutputCachePart.ContentSignalName(widgetPart.Id)));
                 context.Monitor(_signals.When(OutputCachePart.TypeSignalName(widgetPart.ContentItem.ContentType)));
-                var output = RenderWidget(widgetPart);
-                return output;
+
+                reinstateResources = false;
+
+                return _ouputCachedWidgetsService.CaptureWidgetOutput(() => RenderWidget(widgetPart));
             });
-            return _orchardServices.New.RawOutput(Content: widgetOutput);
+
+            if (reinstateResources)
+            {
+                ReinstateResources(cachedModel);
+            }
+
+            return _orchardServices.New.RawOutput(Content: cachedModel.Html);
         }
 
         private string RenderWidget(IContent widget)
@@ -255,6 +273,29 @@ namespace IDeliverable.Widgets.Filters
                 context.Monitor(_signals.When(CacheSettings.CacheKey));
                 return new CacheSettings(workContext.CurrentSite.As<CacheSettingsPart>());
             }));
+        }
+
+        private void ReinstateResources(OutputCachedWidgetModel cachedModel)
+        {
+            foreach (var resource in cachedModel.IncludedResources)
+            {
+                _resourceManager.Include(resource.ResourceType, resource.ResourcePath, resource.ResourceDebugPath, resource.RelativeFromPath);
+            }
+
+            foreach (var resource in cachedModel.RequiredResources)
+            {
+                _resourceManager.Require(resource.ResourceType, resource.ResourceName);
+            }
+
+            foreach (var script in cachedModel.HeadScripts)
+            {
+                _resourceManager.RegisterHeadScript(script);
+            }
+
+            foreach (var script in cachedModel.FootScripts)
+            {
+                _resourceManager.RegisterFootScript(script);
+            }
         }
     }
 }

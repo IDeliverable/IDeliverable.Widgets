@@ -48,6 +48,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\autofac\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -92,12 +96,14 @@
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\EventRaisingResourceManager.cs" />
     <Compile Include="Controllers\WidgetAdminController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Drivers\OutputCachePartDriver.cs" />
     <Compile Include="Drivers\AjaxifyPartDriver.cs" />
     <Compile Include="Drivers\WidgetExPartDriver.cs" />
     <Compile Include="Drivers\WidgetsContainerPartDriver.cs" />
+    <Compile Include="Events\IResourceManagerEvents.cs" />
     <Compile Include="Filters\WidgetOutputCacheFilter.cs" />
     <Compile Include="Handlers\MenuWidgetOutputCachePartHandler.cs" />
     <Compile Include="Handlers\OutputCachePartHandler.cs" />
@@ -105,13 +111,18 @@
     <Compile Include="Migrations\OutputCacheMigrations.cs" />
     <Compile Include="Migrations\AjaxWidgetMigrations.cs" />
     <Compile Include="Migrations\WidgetsContainerMigrations.cs" />
+    <Compile Include="Models\ResourceIncludedModel.cs" />
+    <Compile Include="Models\OutputCachedWidgetModel.cs" />
     <Compile Include="Models\OutputCachePart.cs" />
     <Compile Include="Models\AjaxifyPart.cs" />
+    <Compile Include="Models\ResourceRequiredModel.cs" />
     <Compile Include="Models\WidgetExPart.cs" />
     <Compile Include="Models\WidgetsContainerPart.cs" />
     <Compile Include="ResourceManifests\AjaxWidgetResourceManifest.cs" />
     <Compile Include="Routes\Routes.cs" />
     <Compile Include="Routes\AjaxWidgetRoutes.cs" />
+    <Compile Include="Services\DefaultOuputCachedWidgetsService.cs" />
+    <Compile Include="Services\IOuputCachedWidgetsService.cs" />
     <Compile Include="Services\IWidgetManager.cs" />
     <Compile Include="Services\WidgetManager.cs" />
     <Compile Include="Shapes\WidgetOutputCacheShapes.cs" />
