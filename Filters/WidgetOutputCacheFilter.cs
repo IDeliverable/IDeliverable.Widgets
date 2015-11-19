@@ -287,12 +287,12 @@ namespace IDeliverable.Widgets.Filters
 
             foreach (var script in cachedModel.HeadScripts)
             {
-                    _resourceManager.RegisterHeadScript(script);
+                _resourceManager.RegisterHeadScript(script);
             }
 
             foreach (var script in cachedModel.FootScripts)
             {
-                        _resourceManager.RegisterFootScript(script);
+                _resourceManager.RegisterFootScript(script);
             }
         }
     }
