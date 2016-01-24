@@ -20,4 +20,4 @@ Features:
         Name: Widget Output Cache
         Description: Provides an OutputCachePart for use with widget content types. Attach this part to widgets for which you want to control output caching.
         Category: Widget
-        Dependencies: Orchard.Widgets, Orchard.OutputCache
+        Dependencies: Orchard.Widgets, Orchard.OutputCache, Orchard.Conditions

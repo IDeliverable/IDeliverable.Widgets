@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using IDeliverable.Widgets.Models;
 using Orchard;
 using Orchard.Caching;
+using Orchard.Conditions.Services;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Aspects;
 using Orchard.Core.Settings.Models;
@@ -32,7 +33,7 @@ namespace IDeliverable.Widgets.Filters
     public class WidgetFilter : FilterProvider, IResultFilter
     {
         private readonly IWorkContextAccessor _workContextAccessor;
-        private readonly IRuleManager _ruleManager;
+        private readonly IConditionManager _conditionManager;
         private readonly IWidgetsService _widgetsService;
         private readonly IOrchardServices _orchardServices;
         private readonly IShapeDisplay _shapeDisplay;
@@ -46,7 +47,7 @@ namespace IDeliverable.Widgets.Filters
 
         public WidgetFilter(
             IWorkContextAccessor workContextAccessor,
-            IRuleManager ruleManager,
+            IConditionManager conditionManager,
             IWidgetsService widgetsService,
             IOrchardServices orchardServices,
             IShapeDisplay shapeDisplay,
@@ -59,7 +60,7 @@ namespace IDeliverable.Widgets.Filters
         {
 
             _workContextAccessor = workContextAccessor;
-            _ruleManager = ruleManager;
+            _conditionManager = conditionManager;
             _widgetsService = widgetsService;
             _orchardServices = orchardServices;
             _shapeDisplay = shapeDisplay;
@@ -104,7 +105,7 @@ namespace IDeliverable.Widgets.Filters
                 // ignore the rule if it fails to execute
                 try
                 {
-                    if (_ruleManager.Matches(activeLayer.Record.LayerRule))
+                    if (_conditionManager.Matches(activeLayer.Record.LayerRule))
                     {
                         activeLayerIds.Add(activeLayer.ContentItem.Id);
                     }
@@ -199,7 +200,7 @@ namespace IDeliverable.Widgets.Filters
                 }
             }
 
-            sb.Append("layer=").Append(widgetPart.LayerId.ToString(CultureInfo.InvariantCulture)).Append(";");
+            sb.Append("layer=").Append(widgetPart.LayerId?.ToString(CultureInfo.InvariantCulture)).Append(";");
             sb.Append("zone=").Append(widgetPart.Zone).Append(";");
             sb.Append("widget=").Append(widgetPart.Id.ToString(CultureInfo.InvariantCulture)).Append(";");
             sb.Append("tenant=").Append(_shellSettings.Name).Append(";");
