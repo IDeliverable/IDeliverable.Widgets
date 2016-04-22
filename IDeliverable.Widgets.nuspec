@@ -2,12 +2,14 @@
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
         <id>IDeliverable.Widgets</id>
+		<title>IDeliverable.Widgets</title>
         <version>1.0.2</version>
         <authors>IDeliverable Ltd.</authors>
         <owners>IDeliverable Ltd.</owners>
         <licenseUrl>http://www.ideliverable.com/products/ideliverable-widgets</licenseUrl>
         <projectUrl>http://www.ideliverable.com/products/ideliverable-widgets</projectUrl>
         <iconUrl>http://www.ideliverable.com/Media/Default/Products/IDeliverable.Widgets-Logo.svg</iconUrl>
+		<language>en-US</language>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>The IDeliverable.Widgets module provides a number of useful functional enhancements to the widgets system in the Orchard CMS.</description>
         <summary>A module for the Orchard CMS that extends the built-in widget system with additional functionality. Widgets can be configured to be loaded asynchronously using an AJAX call (without modifying any code or markup). Additionally, widgets can be output cached even if the full page is not. Finally, the module adds a widget container part, which can be used to display widgets per content item without the need to create an item-specific layer.</summary>
