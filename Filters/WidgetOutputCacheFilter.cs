@@ -200,7 +200,7 @@ namespace IDeliverable.Widgets.Filters
                 }
             }
 
-            sb.Append("layer=").Append(widgetPart.LayerId?.ToString(CultureInfo.InvariantCulture)).Append(";");
+            sb.Append("layer=").Append(widgetPart.LayerId.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)).Append(";");
             sb.Append("zone=").Append(widgetPart.Zone).Append(";");
             sb.Append("widget=").Append(widgetPart.Id.ToString(CultureInfo.InvariantCulture)).Append(";");
             sb.Append("tenant=").Append(_shellSettings.Name).Append(";");

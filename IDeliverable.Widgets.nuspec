@@ -2,7 +2,7 @@
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
         <id>IDeliverable.Widgets</id>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <authors>IDeliverable Ltd.</authors>
         <owners>IDeliverable Ltd.</owners>
         <licenseUrl>http://www.ideliverable.com/products/ideliverable-widgets</licenseUrl>
@@ -14,6 +14,6 @@
         <tags>IDeliverable Widgets Ajax Orchard CMS Module Cache Caching Donut</tags>
     </metadata>
     <files>
-        <file src="**" target="content\Modules\IDeliverable.Widgets" exclude="bin\*.*;obj\**;*.user" />
+        <file src="**" target="content\Modules\IDeliverable.Widgets" exclude="bin\*.*;obj\**;*.user;Package.cmd" />
     </files>
 </package>
