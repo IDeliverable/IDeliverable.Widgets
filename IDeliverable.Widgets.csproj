@@ -116,6 +116,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="IDeliverable.Widgets.nuspec" />
+    <None Include="Package.cmd" />
     <None Include="Readme.md" />
     <Content Include="Module.txt" />
     <Content Include="Scripts\admin.edit-widget.js" />
