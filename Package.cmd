@@ -1,0 +1,1 @@
+..\..\..\..\lib\nuget\nuget.exe pack IDeliverable.Widgets.nuspec
