@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using IDeliverable.Widgets.Models;
 using Orchard;
 using Orchard.Caching;
+using Orchard.Conditions.Services;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Aspects;
 using Orchard.Core.Settings.Models;
@@ -22,6 +23,8 @@ using Orchard.UI.Admin;
 using Orchard.Utility.Extensions;
 using Orchard.Widgets.Models;
 using Orchard.Widgets.Services;
+using IDeliverable.Widgets.Services;
+using Orchard.UI.Resources;
 
 namespace IDeliverable.Widgets.Filters
 {
@@ -30,7 +33,7 @@ namespace IDeliverable.Widgets.Filters
     public class WidgetFilter : FilterProvider, IResultFilter
     {
         private readonly IWorkContextAccessor _workContextAccessor;
-        private readonly IRuleManager _ruleManager;
+        private readonly IConditionManager _conditionManager;
         private readonly IWidgetsService _widgetsService;
         private readonly IOrchardServices _orchardServices;
         private readonly IShapeDisplay _shapeDisplay;
@@ -38,22 +41,26 @@ namespace IDeliverable.Widgets.Filters
         private readonly ISignals _signals;
         private readonly IThemeManager _themeManager;
         private readonly ShellSettings _shellSettings;
+        private readonly IOuputCachedWidgetsService _ouputCachedWidgetsService;
+        private readonly IResourceManager _resourceManager;
         private CacheSettings _cacheSettings;
 
         public WidgetFilter(
             IWorkContextAccessor workContextAccessor,
-            IRuleManager ruleManager,
+            IConditionManager conditionManager,
             IWidgetsService widgetsService,
             IOrchardServices orchardServices,
             IShapeDisplay shapeDisplay,
             ICacheManager cacheManager,
             ISignals signals,
             IThemeManager themeManager,
-            ShellSettings shellSettings)
+            ShellSettings shellSettings,
+            IOuputCachedWidgetsService ouputCachedWidgetsService,
+            IResourceManager resourceManager)
         {
 
             _workContextAccessor = workContextAccessor;
-            _ruleManager = ruleManager;
+            _conditionManager = conditionManager;
             _widgetsService = widgetsService;
             _orchardServices = orchardServices;
             _shapeDisplay = shapeDisplay;
@@ -61,6 +68,8 @@ namespace IDeliverable.Widgets.Filters
             _signals = signals;
             _themeManager = themeManager;
             _shellSettings = shellSettings;
+            _ouputCachedWidgetsService = ouputCachedWidgetsService;
+            _resourceManager = resourceManager;
             Logger = NullLogger.Instance;
             T = NullLocalizer.Instance;
         }
@@ -96,7 +105,7 @@ namespace IDeliverable.Widgets.Filters
                 // ignore the rule if it fails to execute
                 try
                 {
-                    if (_ruleManager.Matches(activeLayer.Record.LayerRule))
+                    if (_conditionManager.Matches(activeLayer.Record.LayerRule))
                     {
                         activeLayerIds.Add(activeLayer.ContentItem.Id);
                     }
@@ -191,7 +200,7 @@ namespace IDeliverable.Widgets.Filters
                 }
             }
 
-            sb.Append("layer=").Append(widgetPart.LayerId.ToString(CultureInfo.InvariantCulture)).Append(";");
+            sb.Append("layer=").Append(widgetPart.LayerId?.ToString(CultureInfo.InvariantCulture)).Append(";");
             sb.Append("zone=").Append(widgetPart.Zone).Append(";");
             sb.Append("widget=").Append(widgetPart.Id.ToString(CultureInfo.InvariantCulture)).Append(";");
             sb.Append("tenant=").Append(_shellSettings.Name).Append(";");
@@ -230,16 +239,26 @@ namespace IDeliverable.Widgets.Filters
 
         private dynamic BuildCachedWidgetShape(WidgetPart widgetPart, ControllerContext controllerContext)
         {
+            var reinstateResources = true;
+
             var cacheKey = ComputeCacheKey(widgetPart, controllerContext);
-            var widgetOutput = _cacheManager.Get(cacheKey, context =>
+            var cachedModel = _cacheManager.Get(cacheKey, context =>
             {
                 context.Monitor(_signals.When(OutputCachePart.GenericSignalName));
                 context.Monitor(_signals.When(OutputCachePart.ContentSignalName(widgetPart.Id)));
                 context.Monitor(_signals.When(OutputCachePart.TypeSignalName(widgetPart.ContentItem.ContentType)));
-                var output = RenderWidget(widgetPart);
-                return output;
+
+                reinstateResources = false;
+
+                return _ouputCachedWidgetsService.CaptureWidgetOutput(() => RenderWidget(widgetPart));
             });
-            return _orchardServices.New.RawOutput(Content: widgetOutput);
+
+            if (reinstateResources)
+            {
+                ReinstateResources(cachedModel);
+            }
+
+            return _orchardServices.New.RawOutput(Content: cachedModel.Html);
         }
 
         private string RenderWidget(IContent widget)
@@ -255,6 +274,29 @@ namespace IDeliverable.Widgets.Filters
                 context.Monitor(_signals.When(CacheSettings.CacheKey));
                 return new CacheSettings(workContext.CurrentSite.As<CacheSettingsPart>());
             }));
+        }
+
+        private void ReinstateResources(OutputCachedWidgetModel cachedModel)
+        {
+            foreach (var resource in cachedModel.IncludedResources)
+            {
+                _resourceManager.Include(resource.ResourceType, resource.ResourcePath, resource.ResourceDebugPath, resource.RelativeFromPath);
+            }
+
+            foreach (var resource in cachedModel.RequiredResources)
+            {
+                _resourceManager.Require(resource.ResourceType, resource.ResourceName);
+            }
+
+            foreach (var script in cachedModel.HeadScripts)
+            {
+                _resourceManager.RegisterHeadScript(script);
+            }
+
+            foreach (var script in cachedModel.FootScripts)
+            {
+                _resourceManager.RegisterFootScript(script);
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,19 +12,19 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IDeliverable.Widgets</RootNamespace>
     <AssemblyName>IDeliverable.Widgets</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,10 +48,18 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\newtonsoft.json\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -60,96 +67,117 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\aspnetwebapi\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Readme.md" />
     <Content Include="Module.txt" />
-    <Content Include="Scripts\admin.edit-widget.js">
-      <DependentUpon>admin.edit-widget.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\admin.edit-widget.min.js">
-      <DependentUpon>admin.edit-widget.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\admin.widgets-container.js">
-      <DependentUpon>admin.widgets-container.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\admin.widgets-container.min.js">
-      <DependentUpon>admin.widgets-container.ts</DependentUpon>
-    </Content>
+    <Content Include="Scripts\admin.edit-widget.js" />
+    <Content Include="Scripts\admin.edit-widget.min.js" />
+    <Content Include="Scripts\admin.widgets-container.js" />
+    <Content Include="Scripts\admin.widgets-container.min.js" />
     <Content Include="Scripts\ajaxify.js" />
-    <Content Include="Styles\admin.widgets-container.css">
-      <DependentUpon>admin.widgets-container.less</DependentUpon>
-    </Content>
-    <Content Include="Styles\admin.widgets-container.min.css">
-      <DependentUpon>admin.widgets-container.less</DependentUpon>
-    </Content>
+    <Content Include="Scripts\ajaxify.min.js" />
+    <Content Include="Styles\admin.widgets-container.css" />
+    <Content Include="Styles\admin.widgets-container.min.css" />
     <Content Include="Web.config" />
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\EventRaisingResourceManager.cs" />
     <Compile Include="Controllers\WidgetAdminController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Drivers\OutputCachePartDriver.cs" />
     <Compile Include="Drivers\AjaxifyPartDriver.cs" />
-    <Compile Include="Drivers\AjaxWidgetPartDriver.cs" />
     <Compile Include="Drivers\WidgetExPartDriver.cs" />
     <Compile Include="Drivers\WidgetsContainerPartDriver.cs" />
+    <Compile Include="Events\IResourceManagerEvents.cs" />
     <Compile Include="Filters\WidgetOutputCacheFilter.cs" />
+    <Compile Include="Handlers\MenuWidgetOutputCachePartHandler.cs" />
     <Compile Include="Handlers\OutputCachePartHandler.cs" />
-    <Compile Include="Handlers\AjaxifyPartHandler.cs" />
-    <Compile Include="Handlers\AjaxWidgetPartHandler.cs" />
     <Compile Include="Handlers\WidgetExPartHandler.cs" />
     <Compile Include="Migrations\OutputCacheMigrations.cs" />
     <Compile Include="Migrations\AjaxWidgetMigrations.cs" />
     <Compile Include="Migrations\WidgetsContainerMigrations.cs" />
+    <Compile Include="Models\ResourceIncludedModel.cs" />
+    <Compile Include="Models\OutputCachedWidgetModel.cs" />
     <Compile Include="Models\OutputCachePart.cs" />
     <Compile Include="Models\AjaxifyPart.cs" />
-    <Compile Include="Models\AjaxWidgetPart.cs" />
+    <Compile Include="Models\ResourceRequiredModel.cs" />
     <Compile Include="Models\WidgetExPart.cs" />
     <Compile Include="Models\WidgetsContainerPart.cs" />
     <Compile Include="ResourceManifests\AjaxWidgetResourceManifest.cs" />
     <Compile Include="Routes\Routes.cs" />
     <Compile Include="Routes\AjaxWidgetRoutes.cs" />
+    <Compile Include="Services\DefaultOuputCachedWidgetsService.cs" />
+    <Compile Include="Services\IOuputCachedWidgetsService.cs" />
     <Compile Include="Services\IWidgetManager.cs" />
     <Compile Include="Services\WidgetManager.cs" />
     <Compile Include="Shapes\WidgetOutputCacheShapes.cs" />
     <Compile Include="Shapes\AjaxWidgetShapes.cs" />
-    <Compile Include="SignalKeys.cs" />
-    <Compile Include="ViewModels\AjaxWidgetPartEditViewModel.cs" />
     <Compile Include="ViewModels\WidgetsContainerViewModel.cs" />
     <Compile Include="ViewModels\WidgetViewModel.cs" />
     <Compile Include="ViewModels\ZoneViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\admin.edit-widget.ts" />
-    <TypeScriptCompile Include="Scripts\admin.widgets-container.ts" />
-    <Content Include="Scripts\typings\jquery\jqueryui.d.ts" />
-    <Content Include="Scripts\typings\the-admin.d.ts" />
-    <TypeScriptCompile Include="Scripts\ajaxify.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <Content Include="Assets\TypeScript\admin.edit-widget.ts" />
+    <Content Include="Assets\TypeScript\admin.widgets-container.ts" />
+    <Content Include="Assets\TypeScript\typings\jquery\jqueryui.d.ts" />
+    <Content Include="Assets\TypeScript\typings\the-admin.d.ts" />
+    <Content Include="Assets\TypeScript\ajaxify.ts" />
+    <Content Include="Assets\TypeScript\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Styles\admin.widgets-container.less" />
+    <Content Include="Assets\Less\admin.widgets-container.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Styles\Web.config" />
@@ -179,18 +207,7 @@
     <Content Include="Placement.info" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\admin.edit-widget.js.map" />
-    <Content Include="Scripts\admin.widgets-container.js.map" />
-    <Content Include="Scripts\ajaxify.js.map" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts.Ajaxify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts.AjaxWidget.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AjaxWidgetPartLoading.cshtml" />
@@ -213,6 +230,10 @@
       <Project>{9916839c-39fc-4ceb-a5af-89ca7e87119f}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Conditions\Orchard.Conditions.csproj">
+      <Project>{98251eae-a41b-47b2-aa91-e28b8482da70}</Project>
+      <Name>Orchard.Conditions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard.OutputCache\Orchard.OutputCache.csproj">
       <Project>{6e444ff1-a47c-4cf6-bb3f-507c8ebd776d}</Project>
       <Name>Orchard.OutputCache</Name>
@@ -229,12 +250,23 @@
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts.OutputCache.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AjaxWidgetPartError.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Localization\en-US\orchard.module.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -267,7 +299,7 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
+          <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
