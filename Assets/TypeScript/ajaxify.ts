@@ -4,14 +4,14 @@ module IDeliverable.AjaxWidget {
     $(function () {
 
         $(".widget-ajax-placeholder").each(function () {
-            var placeholder = $(this);
-            var loader = placeholder.find(".widget-ajax-loader");
-            var errorLabel = placeholder.find(".widget-ajax-error");
-            var ajaxUrl = placeholder.data("widget-ajax-url");
-            var parent = placeholder.parent();
+            var placeholder: JQuery = $(this);
+            var loader: JQuery = placeholder.find(".widget-ajax-loader");
+            var errorLabel: JQuery = placeholder.find(".widget-ajax-error");
+            var ajaxUrl: string = placeholder.data("widget-ajax-url");
+            var parent: JQuery = placeholder.parent();
 
             if (ajaxUrl) {
-                var update = function (url, target) {
+                var update = function (url: string, target: JQuery) {
                     errorLabel.hide();
                     loader.show();
                     $.get(url, function (html) {

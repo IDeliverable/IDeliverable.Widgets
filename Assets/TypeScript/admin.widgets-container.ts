@@ -5,7 +5,7 @@
 module WidgetsContainer {
     $(function () {
 
-        var removedWidgets = [];
+        var removedWidgets = new Array<any>();
 
         // Handle Add Widget button.
         $(".add-widget").on("click", function (e: JQueryEventObject) {
@@ -46,13 +46,13 @@ module WidgetsContainer {
         var updateWidgetPlacementField = function () {
             var widgetPlacementField: JQuery = $("input[name='widgetPlacement']");
             var data = {
-                zones: {}
+                zones: <any>{}
             };
             $("div.widgets ul.widgets").each(function(){
                 var zone: string = $(this).data("zone");
                 
                 data.zones[zone] = {
-                    widgets: []
+                    widgets: new Array<any>()
                 };
 
                 $(this).find("li").each(function(){
@@ -80,7 +80,7 @@ module WidgetsContainer {
 
         // Initialize Expando control
         $("#widgetsPlacement legend").expandoControl(
-            function (controller) { 
+            function (controller: any) { 
                 return controller.nextAll(".expando"); }, { 
                     collapse: true, 
                     remember: true });
