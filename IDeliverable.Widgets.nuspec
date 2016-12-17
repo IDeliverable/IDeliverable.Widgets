@@ -11,7 +11,7 @@
         <iconUrl>http://storage.ideliverable.com/media/Default/Products/IDeliverable.Widgets-Logo-256.png</iconUrl>
 		<language>en-US</language>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A module for the Orchard CMS that provides a number of useful functional enhancements to the widgets system in the Orchard CMS.</description>
+        <description>A module for the Orchard CMS that provides a number of useful functional enhancements to the widgets system.</description>
         <summary>IDeliverable.Widgets is a module for the Orchard CMS that extends the built-in widget system with additional functionality. Widgets can be configured to be loaded asynchronously using an AJAX call (without modifying any code or markup). Additionally, widgets can be output cached even if the full page is not. Finally, the module adds a widget container part, which can be used to display widgets per content item without the need to create an item-specific layer.</summary>
         <tags>IDeliverable Widgets Ajax Orchard CMS Module</tags>
     </metadata>
