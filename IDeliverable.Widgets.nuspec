@@ -6,14 +6,14 @@
         <version>1.0.2</version>
         <authors>IDeliverable Ltd.</authors>
         <owners>IDeliverable Ltd.</owners>
-        <licenseUrl>http://www.ideliverable.com/products/ideliverable-widgets</licenseUrl>
-        <projectUrl>http://www.ideliverable.com/products/ideliverable-widgets</projectUrl>
-        <iconUrl>http://www.ideliverable.com/Media/Default/Products/IDeliverable.Widgets-Logo.svg</iconUrl>
+        <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>https://github.com/IDeliverable/IDeliverable.Widgets</projectUrl>
+        <iconUrl>http://storage.ideliverable.com/media/Default/Products/IDeliverable.Widgets-Logo-256.png</iconUrl>
 		<language>en-US</language>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>The IDeliverable.Widgets module provides a number of useful functional enhancements to the widgets system in the Orchard CMS.</description>
-        <summary>A module for the Orchard CMS that extends the built-in widget system with additional functionality. Widgets can be configured to be loaded asynchronously using an AJAX call (without modifying any code or markup). Additionally, widgets can be output cached even if the full page is not. Finally, the module adds a widget container part, which can be used to display widgets per content item without the need to create an item-specific layer.</summary>
-        <tags>IDeliverable Widgets Ajax Orchard CMS Module Cache Caching Donut</tags>
+        <description>A module for the Orchard CMS that provides a number of useful functional enhancements to the widgets system in the Orchard CMS.</description>
+        <summary>IDeliverable.Widgets is a module for the Orchard CMS that extends the built-in widget system with additional functionality. Widgets can be configured to be loaded asynchronously using an AJAX call (without modifying any code or markup). Additionally, widgets can be output cached even if the full page is not. Finally, the module adds a widget container part, which can be used to display widgets per content item without the need to create an item-specific layer.</summary>
+        <tags>IDeliverable Widgets Ajax Orchard CMS Module</tags>
     </metadata>
     <files>
         <file src="**" target="content\Modules\IDeliverable.Widgets" exclude="bin\*.*;obj\**;*.user;Package.cmd" />

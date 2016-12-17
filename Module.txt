@@ -4,7 +4,7 @@ Author: IDeliverable
 Website: https://github.com/IDeliverable/IDeliverable.Widgets
 Version: 1.0.2
 OrchardVersion: 1.10
-Description: Provides advanced widget support, such as widgets per content item, a content picker widget and an way to ajaxify content and widgets.
+Description: Provides a number of useful functional enhancements to the widgets system.
 Features:
     IDeliverable.Widgets:
         Name: Widgets Container
@@ -12,12 +12,12 @@ Features:
         Category: Widget
         Dependencies: Orchard.Widgets, Orchard.Resources, Orchard.Themes
     IDeliverable.Widgets.Ajax
-        Name: Ajax Widget
-        Description: Provides an AjaxifyPart used to create widgets that can load content and other widgets asynchronously via AJAX.
+        Name: Ajax Widgets
+        Description: Provides an AjaxifyPart for use with widget content types. Attach this part fo widgets to load their content asynchronously via AJAX.
         Category: Widget
         Dependencies: Orchard.Widgets, Orchard.Resources
     IDeliverable.Widgets.OutputCache
-        Name: Widget Output Cache
+        Name: Widgets Output Cache
         Description: Provides an OutputCachePart for use with widget content types. Attach this part to widgets for which you want to control output caching.
         Category: Widget
         Dependencies: Orchard.Widgets, Orchard.OutputCache, Orchard.Conditions
