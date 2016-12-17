@@ -7,12 +7,12 @@ OrchardVersion: 1.10
 Description: Provides a number of useful functional enhancements to the widgets system.
 Features:
     IDeliverable.Widgets:
-        Name: Widgets Container
+        Name: Widgets Per Content Item
         Description: Add widgets per content item without creating new layers. Attach the WidgetContainerPart to content types to which you want to be able to add widgets.
         Category: Widget
         Dependencies: Orchard.Widgets, Orchard.Resources, Orchard.Themes
     IDeliverable.Widgets.Ajax
-        Name: Ajax Widgets
+        Name: AJAX Widgets
         Description: Provides an AjaxifyPart for use with widget content types. Attach this part fo widgets to load their content asynchronously via AJAX.
         Category: Widget
         Dependencies: Orchard.Widgets, Orchard.Resources
