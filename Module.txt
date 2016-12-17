@@ -1,6 +1,6 @@
-﻿Name: IDeliverable Widgets
+﻿Name: IDeliverable.Widgets
 AntiForgery: enabled
-Author: IDeliverable
+Author: IDeliverable, Ltd.
 Website: https://github.com/IDeliverable/IDeliverable.Widgets
 Version: 1.0.2
 OrchardVersion: 1.10
